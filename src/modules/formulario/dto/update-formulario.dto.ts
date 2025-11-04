@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateFormularioDto } from './create-formulario.dto';
+import {  dadosDoSeguradoProps } from './create-formulario.dto';
 
-export class UpdateFormularioDto extends PartialType(CreateFormularioDto) {}
+export class UpdateFormularioDto extends PartialType(dadosDoSeguradoProps) {}
