@@ -1,10 +1,9 @@
-import { NestFactory } from '@nestjs/core';
-import { FormModule } from './app.module';
-import cookieParser from 'cookie-parser'; 
 import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import cookieParser from 'cookie-parser';
+import { FormModule } from './app.module';
 
-const csurf = require('csurf'); 
-
+const csurf = require('csurf');
 
 async function bootstrap() {
   const app = await NestFactory.create(FormModule);
@@ -15,7 +14,8 @@ async function bootstrap() {
       whitelist: true, // Remove propriedades não definidas no DTO
       forbidNonWhitelisted: true, // Lança erro se houver propriedades não definidas
       transform: true, // Converte payloads para instâncias de classes DTO
-  }));
+    }),
+  );
 
   app.use(
     csurf({
