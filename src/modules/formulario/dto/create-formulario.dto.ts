@@ -1,6 +1,6 @@
-import { IsString, IsOptional, IsEmail, IsDateString, MinLength } from 'class-validator';
-
-export class dadosDoSeguradoProps { 
+import { IsString, IsOptional, IsEmail, IsDateString, MinLength, IsBoolean } from 'class-validator';
+import { Type } from 'class-transformer'; // 💡 importa o Type
+export class dadosDoSegurado { 
   
   @IsString({ message: 'CPF/CNPJ deve ser uma string' })
   @MinLength(11, { message: 'CPF/CNPJ deve ter no mínimo 11 caracteres' })
@@ -16,7 +16,7 @@ export class dadosDoSeguradoProps {
   nome: string; 
 
   @IsString()
-  cep: string;
+  cep: string; 
 
   @IsString()
   @IsOptional()
@@ -27,18 +27,66 @@ export class dadosDoSeguradoProps {
   email: string;
 } 
 
-export class dadosDoVeiculoProps{ 
+export class dadosDoVeiculo{ 
 
   @IsString()
   @MinLength(7, { message: 'Placa ou Chassi deve ter no mínimo 7 caracteres' })
   placaChassis: string;
 
+  @IsString()
+  modelo: string;
 
+  @IsString()
+  veiculoUso: string;
 
+  @IsBoolean()
+  condutor: boolean;
 
-  } 
+  @IsBoolean()
+  quilometragem: boolean;
 
+  @IsBoolean()
+  leilao: boolean;
 
+  @IsBoolean()
+  sinistrado: boolean;
+
+  @IsBoolean()
+  restricao: boolean;
+}
+
+export class dadosDoSeguro { 
+  @IsString() 
+  tipoCorbertura: string;
+  @IsString()
+  invalidez: string;
+  @IsString() 
+  danosMateriais: string;
+  @IsString()
+  danosCorporais: string
+  @IsString()
+  acessorios: string;
+  @IsString()
+  pequenosReparos: string;
+  @IsString()
+  carroReserva: string; 
+  @IsString()
+  assistencia24: string
+  @IsString()
+  rastreador: string;
+  @IsString()
+  franquia: string;
+}
+export class CompleteForm {
+  @Type(() => dadosDoSegurado) // 💡 indica ao Nest que é um objeto dessa classe
+  Segurado: dadosDoSegurado;
+
+  @Type(() => dadosDoVeiculo) // 💡 idem
+  Veiculo: dadosDoVeiculo;
+
+  @Type(() => dadosDoSeguro) // 💡 idem
+  Seguro: dadosDoSeguro;
+}
 
   // placaChassi?: string
   // modelo?: string
